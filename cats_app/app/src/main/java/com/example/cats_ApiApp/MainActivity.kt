@@ -2,6 +2,7 @@ package com.example.cats_ApiApp
 import android.os.Bundle
 import android.util.Log
 import android.widget.SearchView.OnQueryTextListener
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cats_ApiApp.models.CatsModel
@@ -61,6 +62,11 @@ class MainActivity : AppCompatActivity() {
                         response: Response<List<CatsModel>>
                     ) {
                         var data=response.body()
+                        if (data != null) {
+                            if(data.isEmpty())
+                                Toast.makeText(baseContext,"Cat doesn`t exist",Toast.LENGTH_SHORT).show()
+                        }
+
                         CoroutineScope(Dispatchers.IO).launch {
                             runOnUiThread{
                                 binding.apply {
@@ -68,11 +74,13 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
                         }
+
                         Log.d("data",data.toString())
                     }
 
                     override fun onFailure(call: Call<List<CatsModel>>, t: Throwable) {
                     Log.e("ApiError",t.message.toString())
+                       Toast.makeText(baseContext,"Cat doesn`t exist",Toast.LENGTH_SHORT).show()
                     }
 
                 })
