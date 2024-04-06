@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize status bar color -->
+        <item name="android:statusBarColor">@color/Blue</item>
+        <!-- Customize navigation bar color -->
+    </style>
+</resources>
